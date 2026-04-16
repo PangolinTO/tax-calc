@@ -1,32 +1,32 @@
+import { useContext } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { DataContext, type RequestData } from "@contexts/DataContext";
+import ApiService from "@utils/ApiService";
+import { yearOptions } from "@utils/constants";
 import heroImg from "@assets/Points_PG_Dark.png";
 import "./styles.css";
 
-type FormData = {
-  salaryValue: number;
-  yearValue: number;
-};
-
 const CenterSection: React.FC = () => {
-  const yearOptions: number[] = [2019, 2020, 2021, 2022];
+  const { setData, setRequestData, setIsLoading } = useContext(DataContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<RequestData>({
     defaultValues: {
-      salaryValue: Number("Enter Your Salary..."),
-      yearValue: yearOptions[0],
+      salary: Number("Enter Your Salary..."),
+      year: yearOptions[0],
     },
     mode: "onChange",
   });
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("data: ");
-    console.log(data);
-    if (errors) {
-      console.log("error: ");
-      console.log(errors);
+  const onSubmit: SubmitHandler<RequestData> = async (data) => {
+    setIsLoading(true);
+    setRequestData(data);
+    if (data.year) {
+      const result = await ApiService.submitData(data.year);
+      setData(result);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -41,21 +41,23 @@ const CenterSection: React.FC = () => {
             type="number"
             step="0.01"
             placeholder="Enter Your Salary..."
-            {...register("salaryValue", {
+            {...register("salary", {
               required: true,
               valueAsNumber: true,
             })}
-            aria-invalid={errors.salaryValue ? "true" : "false"}
+            aria-invalid={errors.salary ? "true" : "false"}
           />
           <select
-            {...(register("yearValue"), { required: true })}
-            aria-invalid={errors.yearValue ? "true" : "false"}
+            {...(register("year"), { required: true })}
+            aria-invalid={errors.year ? "true" : "false"}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Year
             </option>
             {yearOptions.map((year) => (
-              <option key={year}>{year}</option>
+              <option key={year} value={year}>
+                {year}
+              </option>
             ))}
           </select>
           <button type="submit" className="submit">

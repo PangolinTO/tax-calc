@@ -1,6 +1,7 @@
 #results {
   display: flex;
   border-top: 1px solid var(--border);
+  min-height: 260px;
 
   & > div {
     flex: 1 1 0;
@@ -8,6 +9,16 @@
     @media (max-width: 1024px) {
       padding: 24px 20px;
     }
+  }
+
+  div#error {
+    p {
+      color: var(--error);
+    }
+  }
+
+  div[aria-label="circular-progress-loading"] {
+    display: inline-block;
   }
 
   @media (max-width: 1024px) {
