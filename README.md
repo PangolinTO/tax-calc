@@ -1,19 +1,20 @@
 # Tax Calculator
 
-##Tools used
+## Tools used
 
 - `vite`
 - `react-hook-form`
 - `axios`
 - `react-load-spinner`
 
-#Potential Improvements
+## Potential Improvements
 
 - Unit/Integration Tests
 - More robust error handling (React `ErrorBoundary`)
 - Further abstraction of utility functions
 - Confirm `react-hook-form` working as intended
 
-#Getting Up and Running
+## Getting Up and Running
 
-Simply type `yarn start`!
+- `yarn install`
+- `yarn start`!
