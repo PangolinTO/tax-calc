@@ -1,21 +1,20 @@
 import { useState } from "react";
-import heroImg from "../../assets/Points_PG_Dark.png";
+import heroImg from "@assets/Points_PG_Dark.png";
 import "./styles.css";
 
-function CenterSection() {
-  const yearValues = [2019, 2020, 2021, 2022];
-  const [salaryValue, setSalaryValue] = useState(null);
-  const [yearValue, setYearValue] = useState(null);
+const CenterSection: React.FC = () => {
+  const [salaryValue, setSalaryValue] = useState<number>(0);
+  const [yearValue, setYearValue] = useState<number>(0);
+  const yearOptions: number[] = [2019, 2020, 2021, 2022];
 
-  const handleSalaryChange = (e) => {
-    const rawValue = e.target.value.replace(/\D/g, "");
-    const formattedValue = Number(rawValue).toLocaleString();
-    setSalaryValue(formattedValue);
+  const handleSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSalaryValue(Number(e.target.value));
   };
 
-  const handleYearChange = (e) => {
-    setYearValue(e.target.value);
+  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setYearValue(Number(e.target.value));
   };
+
   return (
     <section id="center">
       <div className="hero">
@@ -35,7 +34,7 @@ function CenterSection() {
             <option value="" disabled selected>
               Select Year
             </option>
-            {yearValues.map((year) => (
+            {yearOptions.map((year) => (
               <option key={year}>{year}</option>
             ))}
           </select>
@@ -46,6 +45,6 @@ function CenterSection() {
       </div>
     </section>
   );
-}
+};
 
 export default CenterSection;

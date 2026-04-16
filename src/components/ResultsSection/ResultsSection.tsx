@@ -1,6 +1,6 @@
 import "./styles.css";
 
-function ResultsSection() {
+const ResultsSection: React.FC = () => {
   return (
     <section id="results">
       <div id="values">
@@ -12,6 +12,6 @@ function ResultsSection() {
       </div>
     </section>
   );
-}
+};
 
 export default ResultsSection;
