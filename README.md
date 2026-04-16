@@ -17,4 +17,4 @@
 ## Getting Up and Running
 
 - `yarn install`
-- `yarn start`!
+- `yarn start`
