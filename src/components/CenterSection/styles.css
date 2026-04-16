@@ -57,6 +57,11 @@ form {
     }
   }
 
+  input[aria-invalid="true"],
+  select[aria-invalid="true"] {
+    outline: 2px solid var(--error-border);
+  }
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
